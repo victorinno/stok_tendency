@@ -26,12 +26,10 @@ data_train <- data[1:3034,]
 data_test <- data[3035:3834,]
 
 data_train_label <- data[1:3034,7]
+data_train_label <- as.factor(data_train_label$up_10_days)
 data_test_label <- data[3035:3834,7]
-
-dim(data_train)
-dim(data_test)
-dim(data_train_label)
+data_test_label <- as.factor(data_test_label$up_10_days)
 
 pred <- knn(train = data_train, test = data_test, cl = data_train_label, k = 61)
 
-Crosstable(x = data_test_label, y = pred, prop.chisq = FALSE)
+CrossTable(x = data_test_label, y = pred, prop.chisq = FALSE)
